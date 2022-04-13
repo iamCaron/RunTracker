@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/setupFragment">
+
+
+    <action android:id="@+id/action_global_tracking_fragment"
+        app:destination="@id/trackingFragment"
+        app:launchSingleTop="true"/>
+
+    <fragment
+        android:id="@+id/runsFragment"
+        android:name="com.caron.runtracker.ui.fragments.RunsFragment"
+        android:label="RunsFragment">
+        <action
+            android:id="@+id/action_runsFragment_to_runDetailsFragment"
+            app:destination="@id/runDetailsFragment" />
+        <action
+            android:id="@+id/action_runsFragment_to_trackingFragment"
+            app:destination="@id/trackingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupFragment"
+        android:name="com.caron.runtracker.ui.fragments.SetupFragment"
+        android:label="SetupFragment" >
+        <action
+            android:id="@+id/action_setupFragment_to_runsFragment"
+            app:destination="@id/runsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.caron.runtracker.ui.fragments.ProfileFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.caron.runtracker.ui.fragments.TrackingFragment"
+        android:label="TrackingFragment" >
+        <action
+            android:id="@+id/action_trackingFragment_to_runsFragment"
+            app:destination="@id/runsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/runsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.caron.runtracker.ui.fragments.StatisticsFragment"
+        android:label="StatisticsFragment" />
+    <fragment
+        android:id="@+id/runDetailsFragment"
+        android:name="com.caron.runtracker.ui.fragments.RunDetailsFragment"
+        android:label="RunDetailsFragment" >
+        <argument
+            android:name="run"
+            app:argType="com.caron.runtracker.db.Run" />
+        <action
+            android:id="@+id/action_runDetailsFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_runDetailsFragment_to_runsFragment"
+            app:destination="@id/runsFragment"
+            app:popUpTo="@id/runsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.caron.runtracker.ui.fragments.MapFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_map" >
+        <argument
+            android:name="polylines"
+            app:argType="com.caron.runtracker.domain.Polylines"/>
+        <action
+            android:id="@+id/action_mapsFragment_to_runDetailsFragment"
+            app:destination="@id/runDetailsFragment"
+            app:popUpTo="@id/runDetailsFragment" />
+    </fragment>
+</navigation>
